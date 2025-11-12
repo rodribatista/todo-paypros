@@ -9,7 +9,7 @@ export class GetTasksUseCase {
     @Inject(TASKS_REPOSITORY)
     private readonly repository: TasksRepository,
   ) {}
-  execute(): Promise<TaskEntity[]> {
-    return this.repository.findAll();
+  execute(input: string): Promise<TaskEntity[]> {
+    return this.repository.findAllByUser(input);
   }
 }

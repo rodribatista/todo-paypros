@@ -23,6 +23,7 @@ export class CreateTaskUseCase {
       input.description,
       TaskStatus.PENDING,
       dueDateFinalDay,
+      input.userId,
     );
     return this.repository.create(task);
   }

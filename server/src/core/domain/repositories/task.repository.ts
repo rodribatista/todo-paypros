@@ -1,7 +1,7 @@
 import { TaskEntity } from '../entities/task.entity';
 
 export interface TasksRepository {
-  findAll(): Promise<TaskEntity[]>;
+  findAllByUser(id: string): Promise<TaskEntity[]>;
   findById(id: string): Promise<TaskEntity | null>;
   create(task: TaskEntity): Promise<TaskEntity>;
   update(id: string, task: Partial<TaskEntity>): Promise<TaskEntity>;

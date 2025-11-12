@@ -7,7 +7,8 @@ export class MemoryTasksRepository implements TasksRepository {
   private tasks: TaskEntity[] = [];
   private nextId = 1;
 
-  findAll(): Promise<TaskEntity[]> {
+  findAllByUser(id: string): Promise<TaskEntity[]> {
+    console.log(id);
     return new Promise((resolve) => resolve(this.tasks));
   }
 

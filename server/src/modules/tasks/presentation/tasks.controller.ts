@@ -30,7 +30,7 @@ export class TasksController {
 
   @Get()
   getAll() {
-    return this.getTasks.execute();
+    return this.getTasks.execute('45e74244-2da5-428b-b3f3-721d814c5bcb');
   }
 
   @Post()
@@ -39,6 +39,7 @@ export class TasksController {
       title: body.title,
       description: body.description,
       dueDate: new Date(body.dueDate),
+      userId: '45e74244-2da5-428b-b3f3-721d814c5bcb',
     });
   }
 

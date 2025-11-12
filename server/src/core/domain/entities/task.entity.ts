@@ -10,5 +10,6 @@ export class TaskEntity {
     public description: string,
     public status: TaskStatus,
     public dueDate: Date,
+    public readonly userId: string,
   ) {}
 }

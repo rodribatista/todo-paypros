@@ -5,35 +5,32 @@ import {
   type TaskStatus,
 } from '../../../core/domain/entities/task.entity';
 import { PrismaService } from '../../../modules/datasource/prisma.service';
+import { Task } from '@prisma/client';
 
 @Injectable()
 export class PrismaTasksRepository implements TasksRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(): Promise<TaskEntity[]> {
-    const tasks = await this.prisma.task.findMany();
-    return tasks.map(
-      (t) =>
-        new TaskEntity(
-          t.id,
-          t.title,
-          t.description,
-          t.status as TaskStatus,
-          t.dueDate,
-        ),
+  private toDomain(t: Task): TaskEntity {
+    return new TaskEntity(
+      t.id,
+      t.title,
+      t.description,
+      t.status as TaskStatus,
+      t.dueDate,
+      t.userId,
     );
   }
 
+  async findAllByUser(id: string): Promise<TaskEntity[]> {
+    const found = await this.prisma.task.findMany({ where: { userId: id } });
+    return found.map((t) => this.toDomain(t));
+  }
+
   async findById(id: string): Promise<TaskEntity | null> {
-    const task = await this.prisma.task.findUnique({ where: { id } });
-    if (!task) return null;
-    return new TaskEntity(
-      task.id,
-      task.title,
-      task.description,
-      task.status as TaskStatus,
-      task.dueDate,
-    );
+    const found = await this.prisma.task.findUnique({ where: { id } });
+    if (!found) return null;
+    return this.toDomain(found);
   }
 
   async create(data: TaskEntity): Promise<TaskEntity> {
@@ -43,15 +40,10 @@ export class PrismaTasksRepository implements TasksRepository {
         description: data.description,
         status: data.status,
         dueDate: data.dueDate,
+        userId: data.userId,
       },
     });
-    return new TaskEntity(
-      created.id,
-      created.title,
-      created.description,
-      created.status as TaskStatus,
-      created.dueDate,
-    );
+    return this.toDomain(created);
   }
 
   async update(id: string, data: Partial<TaskEntity>): Promise<TaskEntity> {
@@ -64,13 +56,7 @@ export class PrismaTasksRepository implements TasksRepository {
         dueDate: data.dueDate,
       },
     });
-    return new TaskEntity(
-      updated.id,
-      updated.title,
-      updated.description,
-      updated.status as TaskStatus,
-      updated.dueDate,
-    );
+    return this.toDomain(updated);
   }
 
   async delete(id: string): Promise<void> {
