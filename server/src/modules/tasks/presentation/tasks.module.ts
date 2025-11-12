@@ -5,6 +5,7 @@ import { MemoryTasksRepository } from '../infrastructure/memory-tasks.repository
 import { CreateTaskUseCase } from '../application/use-cases/create-task.usecase';
 import { GetTasksUseCase } from '../application/use-cases/get-tasks.usecase';
 import { UpdateTaskUseCase } from '../application/use-cases/update-task.usecase';
+import { UpdateTaskStatusUseCase } from '../application/use-cases/update-task-status.usecase';
 import { DeleteTaskUseCase } from '../application/use-cases/delete-task.usecase';
 
 @Module({
@@ -18,6 +19,7 @@ import { DeleteTaskUseCase } from '../application/use-cases/delete-task.usecase'
     CreateTaskUseCase,
     GetTasksUseCase,
     UpdateTaskUseCase,
+    UpdateTaskStatusUseCase,
     DeleteTaskUseCase,
   ],
 })
