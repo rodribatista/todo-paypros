@@ -1,8 +1,25 @@
 services:
   db:
     image: mysql:5.7
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: todo
+    networks:
+      - todo-network
+  server:
+    build:
+        context: ./server
+        dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
     ports:
-      - "3306:3306"
+      - "3000:3000"
+    environment:
+      DATABASE_URL: mysql://root:root@db:3306/todo
+    networks:
+      - todo-network
+networks:
+  todo-network:
+    driver: bridge
