@@ -9,6 +9,7 @@ import {
   HttpCode,
   HttpStatus,
   Patch,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateTaskUseCase } from '../application/use-cases/create-task.usecase';
 import { GetTasksUseCase } from '../application/use-cases/get-tasks.usecase';
@@ -17,7 +18,10 @@ import { UpdateTaskStatusUseCase } from '../application/use-cases/update-task-st
 import { DeleteTaskUseCase } from '../application/use-cases/delete-task.usecase';
 import { CreateTaskRequest } from './dto/create-task.request';
 import { UpdateTaskRequest } from './dto/update-task.request';
+import { JwtAuthGuard } from 'src/modules/auth/infrastructure/jwt.guard';
+import { CurrentUser } from 'src/modules/auth/infrastructure/current-user.decorator';
 
+@UseGuards(JwtAuthGuard)
 @Controller('tasks')
 export class TasksController {
   constructor(
@@ -29,17 +33,17 @@ export class TasksController {
   ) {}
 
   @Get()
-  getAll() {
-    return this.getTasks.execute('45e74244-2da5-428b-b3f3-721d814c5bcb');
+  getAll(@CurrentUser() userId: string) {
+    return this.getTasks.execute(userId);
   }
 
   @Post()
-  create(@Body() body: CreateTaskRequest) {
+  create(@CurrentUser() userId: string, @Body() body: CreateTaskRequest) {
     return this.createTask.execute({
       title: body.title,
       description: body.description,
       dueDate: new Date(body.dueDate),
-      userId: '45e74244-2da5-428b-b3f3-721d814c5bcb',
+      userId,
     });
   }
 
