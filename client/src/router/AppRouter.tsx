@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NotFound from "../shared/pages/NotFound";
-import Register from "../modules/auth/pages/Register";
-import Login from "../modules/auth/pages/Login";
+import NotFound from "../shared/ui/pages/NotFound";
+import Register from "../modules/auth/ui/pages/Register";
+import Login from "../modules/auth/ui/pages/Login";
 import Tasks from "../modules/tasks/pages/Tasks";
 
 function AppRouter() {

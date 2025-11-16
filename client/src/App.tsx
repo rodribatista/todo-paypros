@@ -1,10 +1,15 @@
 import AppRouter from "./router/AppRouter";
+import { Toaster } from "sonner";
 
 function App() {
-  return (
-    <div className="flex w-full p-20 justify-center">
-      <AppRouter />
-    </div>
-  )
+  return <>
+    <Toaster
+      position="top-center"
+      theme='dark'
+      richColors
+      closeButton
+    />
+    <AppRouter />
+  </>
 }
 export default App;
