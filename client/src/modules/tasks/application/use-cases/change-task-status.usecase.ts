@@ -4,8 +4,7 @@ import { useAuthStore } from "../../../../infrastructure/store/auth.store";
 
 export async function changeTaskStatusUseCase(input: string) {
   try {
-    const response = await tasksService.changeTaskStatus(input);
-    console.log(response);
+    await tasksService.changeTaskStatus(input);
   } catch(error) {
     if (isAppError(error)) {
       handleGetTasksErrors(error);

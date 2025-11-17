@@ -1,6 +1,6 @@
 import type { TaskModel } from "../../application/domain/dto/task.dto";
 import { useTaskStore } from "../../infrastructure/store/tasks.store";
-
+import { formatDate } from "../../../../shared/utils/formatDate";
 export const TaskItem = ({ task }: { task: TaskModel }) => {
   const { changeTaskStatus, deleteTask } = useTaskStore();
   const isCompleted: boolean = task.status === 'completed';
@@ -16,8 +16,13 @@ export const TaskItem = ({ task }: { task: TaskModel }) => {
           className={`text-sm px-3 py-1 rounded-xl ${isCompleted ? "bg-green-700 text-green-200" : "bg-indigo-900 text-neutral-300"} hover:cursor-pointer`}
           onClick={() => changeTaskStatus(task.id)}
         >
-          {isCompleted ? "Completada" : `${task.dueDate}`}
+          {isCompleted ? "Completada" : "Pendiente"}
         </button>
+        {!isCompleted &&
+        <button className="text-sm px-3 py-1 rounded-xl bg-indigo-900 text-neutral-300">
+          {formatDate(task.dueDate)}
+        </button>
+        }
         {isCompleted &&
           <button
             className={`text-sm px-3 py-1 rounded-xl bg-indigo-900 text-neutral-300"} hover:cursor-pointer`}

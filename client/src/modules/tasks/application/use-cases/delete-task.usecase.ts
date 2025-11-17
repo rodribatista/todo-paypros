@@ -4,8 +4,7 @@ import { useAuthStore } from "../../../../infrastructure/store/auth.store";
 
 export async function deleteTaskUseCase(input:string) {
   try {
-    const response = await tasksService.deleteTask(input);
-    console.log(response);
+    await tasksService.deleteTask(input);
   } catch(error) {
     if (isAppError(error)) {
       handleGetTasksErrors(error);
