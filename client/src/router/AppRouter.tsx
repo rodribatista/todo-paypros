@@ -3,7 +3,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import RegisterPage from "../modules/auth/ui/pages/Register";
 import LoginPage from "../modules/auth/ui/pages/Login";
-import Tasks from "../modules/tasks/pages/Tasks";
+import Tasks from "../modules/tasks/ui/pages/Tasks";
 import NotFound from "../shared/ui/pages/NotFound";
 
 function AppRouter() {

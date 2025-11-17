@@ -22,7 +22,6 @@ export const RegisterForm = () => {
     try {
       notify.loading('register', 'Creando cuenta del usuario...');
       await registerUserUseCase(data);
-
       notify.success('register', 'Usuario registrado correctamente');
       navigate('/login')
     } catch(error) {

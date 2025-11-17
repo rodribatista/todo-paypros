@@ -24,7 +24,7 @@ export async function authLoginUseCase(input: LoginModel) {
 function handleRegisterErrors(error: AppError) {
   switch (error.type) {
     case ErrorType.UNAUTHORIZED:
-      throw new AppError(ErrorType.CONFLICT, "Credenciales invalidas. Intenta nuevamente!")
+      throw new AppError(ErrorType.UNAUTHORIZED, "Credenciales invalidas. Intenta nuevamente!")
     default:
       throw error;
   }
