@@ -49,20 +49,46 @@ Authorization: Bearer <token>
 
 ---
 
+## Frontend
+
+Está desarrollado con **React** + **Typescript**, con manejo de estado global a través de **Zustand**, validación de formularios con **React Hook Form** + **Zod** y estilado principal con **TailwindCSS**.
+
+Al igual que el Backend, el proyecto sigue una estructura modular inspirada en Clean Architecture, separando dominio, casos de uso y capa de infraestructura. Cada capa tiene responsabilidades bien definidas, lo que facilita las pruebas unitarias, mejora la mantenibilidad y escalabilidad del código.
+
+---
+
+### Decisiones y aprendizajes
+
+- Se eligió Zustand sobre Redux por simplicidad y menor boilerplate.
+
+- La autenticación se maneja con Zustand, manteniendo al usuario logueado en memoria y persistiendo el token en **localStorage**.
+
+- Se creo un store con Zustand para gestionar las tareas. Este store no reemplaza la base de datos, solo sirve como fuente reactiva.
+
+- Manejo centralizado de notificaciones mediante un hook personalizado `useNotify()`.
+
+---
+
 ## Ejecución y evaluación
 La aplicación se dockerizó para simplificar la ejecución y evaluación.
 
 El archivo `docker-compose.yml` levanta automáticamente:
-- Una base de datos MySQL
-- El servidor NestJS
-- La configuración de entorno necesaria (variables embebidas para la prueba técnica)
-
-El contenedor automáticamente:
-- Instala dependencias necesarias.
-- Ejecuta migraciones de Prisma.
-- Inicia el servidor y expone la API.
+- Una base de datos MySQL.
+- Un servidor NestJS para la API.
+- Un servidor Nginx para servir la aplicación estática.
+- La configuración de entorno necesaria (variables embebidas para la prueba técnica).
 
 ⚠️ El servicio de base de datos no expone el puerto MySQL al host, como la comunicación entre contenedores ocurre dentro de la red interna de Docker, se tomo la decision de no exponer al host para evitar conflictos de puertos no disponibles.
+
+El contenedor backend automáticamente:
+1. Instala dependencias necesarias.
+2. Ejecuta migraciones de Prisma.
+3. Inicia el servidor y expone la API.
+
+El contenedor frontend automáticamente:
+1. Instala dependencias necesarias.
+2. Construye la aplicación con Vite.
+3. Sirve la aplicación estática desde Nginx.
 
 ### Pasos de ejecución:
 
@@ -75,7 +101,7 @@ cd <repo-name>
 docker compose up
 ```
 
-Una vez iniciado, la API estará disponible en:
+Una vez iniciado, la APP estará disponible en:
 ```bash
-http://localhost:3000
+http://localhost:8080
 ```
