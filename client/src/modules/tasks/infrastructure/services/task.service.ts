@@ -1,4 +1,5 @@
 import { api } from "../../../../infrastructure/http/axios.instance";
+import type { TaskRequest } from "../../application/domain/dto/task.request";
 
 export const tasksService = {
   async getTasks() {
@@ -10,5 +11,9 @@ export const tasksService = {
   },
   async deleteTask(id: string) {
     return await api.delete(`/tasks/${id}`);
+  },
+  async createTask(data: TaskRequest) {
+    const res = await api.post("/tasks", data);
+    return res.data;
   },
 };

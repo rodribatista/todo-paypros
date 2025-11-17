@@ -9,7 +9,7 @@ export const TaskSchema = z.object({
     .string()
     .nonempty()
     .max(150, "Máximo 150 caracteres"),
-  dueDate: z
+  dueDate: z.coerce
     .date()
     .min(new Date(), { error: "Debe ser mayor a hoy." }),
 });
