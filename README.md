@@ -94,8 +94,8 @@ El contenedor frontend automáticamente:
 
 ```bash
 # 1. Clonar el repositorio
-git clone <repo-url>
-cd <repo-name>
+git clone https://github.com/rodribatista/todo-paypros.git
+cd todo-paypros
 
 # 2. Levantar el entorno con Docker
 docker compose up
