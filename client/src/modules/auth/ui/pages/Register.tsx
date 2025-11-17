@@ -1,7 +1,7 @@
 import { RegisterForm } from "../components/RegisterForm";
 import { Link } from "react-router-dom";
 
-function Register() {
+function RegisterPage() {
   return (
     <main className="w-full flex flex-col gap-10 items-center justify-center">
       <p className="w-1/2 text-6xl font-light text-center">Crea tu cuenta y registra tus tareas</p>
@@ -18,4 +18,4 @@ function Register() {
     </main>
   );
 }
-export default Register;
+export default RegisterPage;

@@ -1,7 +1,7 @@
 import type { RegisterModel } from "../domain/dto/register.dto";
 import { RegisterSchema } from "../domain/register.schema";
 import { authService } from "../../infrastructure/services/auth.service";
-import { AppError, ErrorType, isAppError } from "../../../../lib/http/error.mapper";
+import { AppError, ErrorType, isAppError } from "../../../../infrastructure/http/error.mapper";
 
 export async function registerUserUseCase(input: RegisterModel) {
   try {

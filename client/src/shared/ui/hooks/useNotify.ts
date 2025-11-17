@@ -1,4 +1,4 @@
-import { notificationService } from "../../../lib/notifications/notification.service";
+import { notificationService } from "../../../infrastructure/notifications/notification.service";
 
 export function useNotify() {
   return {
