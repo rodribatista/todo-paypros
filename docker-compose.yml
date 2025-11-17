@@ -20,6 +20,17 @@ services:
       DATABASE_URL: mysql://root:root@db:3306/todo
     networks:
       - todo-network
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - server
+    networks:
+      - todo-network
 networks:
   todo-network:
     driver: bridge
